@@ -243,3 +243,7 @@ $(document).click(function(loc) {
 	
 	logClicks(x,y);
 });
+bio.display();
+work.display();
+education.display();
+projects.display();
