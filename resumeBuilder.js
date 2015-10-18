@@ -68,22 +68,17 @@ var work = {
             "dates": "2012",
             "description": "I traveled to Egg Farms across the State of Utah and performed quality checks to ensure the eggs met USDA standards.",
         }],
-		"display": function() {
-		for (job in work.jobs) {
+	function displayWork() {
+		for (var job in work.jobs) {
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace ("%data%", work.jobs[job].employer);
 		var formattedTitle = HTMLworkTitle.replace ("%data%", work.jobs[job].title);
 		var formattedEmployerTitle = formattedEmployer + formattedTitle;
-		$(".work=entry:last").append(formattedEmployerTitle);
+		$(".work-entry:last").append(formattedEmployerTitle);
 		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
 		$(".work-entry:last").append(formattedDates);
-		if(work.jobs[job].duties.length > 0) {
-			$(".work-entry: last").append(HTMLworkdutiesStart);
-			for(duty in work.jobs[job].duties){
-				var formattedDuties = HTMLworkDuties.replace("%data%", work.jobs[job].duties[duty]);
 				}
-            };
-            var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);          
+        var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);          
             $('.work-entry:last').append(formattedDescription);
         }
     }
@@ -131,7 +126,7 @@ var education = {
             'url': 'https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001'
         }
 ],
-	"display": function() {
+	education.display = function() {
         for (school in education.schools) {
             var formattedSchool = HTMLschoolName.replace
             ("%data%", education.schools[school].name);
@@ -177,41 +172,35 @@ var projects = {
         "images": [""],
         "url": ""
 	}
-    ],
-	"display": function() {
+    ]};
+	projects.display = function() {
         for (project in projects.projects) {
+			$("#projects").append(HTMLprojectStart);
+			
         var formattedTitle = HTMLprojectTitle.replace
         ("%data%", projects.projects[project].title);
-        var formattedTitle = formattedTitle.replace
-        ("#", projects.projects[project].url);      
+		$(".project-entry:last").append(formattedTitle);
+		 
         var formattedDates = HTMLprojectDates.replace
         ("%data%", projects.projects[project].dates);
-        var formattedDescription = HTMLprojectDescription.replace
-        ("%data%", projects.projects[project].description);
-
-        $("#projects").append(HTMLprojectStart);
-        $(".project-entry:last").append(formattedTitle);
-        $(".project-entry:last").append(formattedDates);            
+		$(".project-entry:last").append(formattedDates);
+		
+        var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
         $(".project-entry:last").append(formattedDescription);
-        
+              
         if (projects.projects[project].images.length > 0) {
             for (image in projects.projects[project].images) {
-                var formattedImage =HTMLprojectImage.replace
-                ("%data%", projects.projects[project].images[image]);
+                var formattedImage =HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
                 $(".project-entry:last").append(formattedImage);
             }
         }
     }
-    }
-};
+    };
 
-$(document).click(function(loc) {
-	var x = loc.pageX;
-	var y = loc.pageY;
-	
-	logClicks(x,y);
-});
+$('#mapDiv').append(googleMap);
+
 bio.display();
-work.display();
+displayWork();
 education.display();
 projects.display();
+console.log(work.display);
