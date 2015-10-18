@@ -25,18 +25,11 @@ var bio = {
             $("#skillsItem").append(formattedSkill);    
             }
 		};
-		var cntfoMobile = HTMLmobile.replace(/%data%/gi, bio.contacts.mobile);
-		var cntfoTwitter = HTMLtwitter.replace(/%data%/gi, bio.contacts.mobile);
-		var cntfoGithub = HTMLgithub.replace(/%data%/gi, bio.contacts.github);
-        var cntfoLocation = HTMLlocation.replace('%data%', bio.contacts.location);
-        var cntfoLinkedin = HTMLlinkedin.replace('%data%', bio.contacts.linkedin);
-        var cntfoEmail = HTMLemail.replace(/%data%/gi, bio.contacts.email);
-        var formattedContactnfo = cntfoMobile + cntfoEmail + cntfoLinkedin + cntfoGithub + cntfoTwitter + cntfoLocation;
+		
 		$("#header").prepend(formattedRole);
         $("#header").prepend(formattedName);
 		$("#header").append(formattedBioPic);
 		$("#header").append(formattedwelcomeMsg);
-		$("#topContacts, #footerContacts").append(formattedContactnfo);
 		$("#footerContacts li a").removeClass("contact-tpp");
 	}
 };
@@ -67,9 +60,9 @@ var work = {
             "location": "Delta, Utah",
             "dates": "2012",
             "description": "I traveled to Egg Farms across the State of Utah and performed quality checks to ensure the eggs met USDA standards.",
-        }],
-	function displayWork() {
-		for (var job in work.jobs) {
+        }]};
+	work.display = function() {
+		for (job in work.jobs) {
 		$("#workExperience").append(HTMLworkStart);
 		var formattedEmployer = HTMLworkEmployer.replace ("%data%", work.jobs[job].employer);
 		var formattedTitle = HTMLworkTitle.replace ("%data%", work.jobs[job].title);
@@ -80,9 +73,8 @@ var work = {
 				}
         var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);          
             $('.work-entry:last').append(formattedDescription);
-        }
-    }
-};
+        };
+
 				
 var education = {
     "schools": [{
@@ -125,7 +117,7 @@ var education = {
             'dates': '2015-Current',
             'url': 'https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001'
         }
-],
+]};
 	education.display = function() {
         for (school in education.schools) {
             var formattedSchool = HTMLschoolName.replace
@@ -160,8 +152,7 @@ var education = {
             $(".education-entry:last").append(formattedSchoolTitle);
             $(".education-entry:last").append(formattedDates);        
         }
-    }
-};
+    };
 
 var projects = {
     "projects": [
@@ -200,7 +191,7 @@ var projects = {
 $('#mapDiv').append(googleMap);
 
 bio.display();
-displayWork();
+work.display();
 education.display();
 projects.display();
 console.log(work.display);
